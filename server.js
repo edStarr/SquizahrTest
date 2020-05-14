@@ -20,12 +20,18 @@ app.use(express.static("public"))
 
 const mongoose = require ("mongoose")
 
-const mongoURI = require ("./config/keys").mongoURI
+/*const mongoURI = require ("./config/keys").mongoURI
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useCreateIndex : true,
     useUnifiedTopology : true
+})*/
+
+mongoose.connect(process.env.DATABASE_URL, {
+    useUnifiedTopology : true,
+    useNewUrlParser: true,
+    useCreateIndex : true
 })
 
 
