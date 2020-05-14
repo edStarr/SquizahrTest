@@ -1,2 +1,2 @@
-# SquizahrTest
+# squizahr
 testAppRepo
