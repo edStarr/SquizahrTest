@@ -1,1 +1,10 @@
-all owners
+<h2>Search owners</h2>
+<form action="/owners" method="GET">
+<lable>OwnersName</lable>
+<input type="text" name="OwnersName" value=" <%= searchOptions.OwnersName %>">
+<button type="submit">Search Owners</button>
+</form>
+<br>
+<% owners.forEach(owner => { %>
+    <div><%= owner.OwnersName %></div>
+<% }) %>

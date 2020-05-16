@@ -4,8 +4,19 @@ const Owner = require ("../models/owner")
 
 //AllOwners
 
-router.get("/", (req, res) => {
-    res.render("owners/index")
+router.get("/", async (req, res) => {
+    let searchOptions = {}
+    if (req.query.OwnersName != null && req.query.OwnersName !== "") {
+        searchOptions.OwnersName = new RegExp(req.query.OwnersName, "i")
+    }
+    try {
+        const owners = await Owner.find({searchOptions})  
+        res.render("owners/index", {
+            owners: owners,
+            searchOptions: req.query })
+    } catch {
+        res.redirect("/")
+    }
 })
 
 
@@ -18,21 +29,20 @@ router.get("/new", (req, res) => {
 
 // Create new owner
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const owner = new Owner({
         OwnersName: req.body.OwnersName
     })
-    owner.save((err, newOwner) =>{
-        if (err) {
-            res.render("owners/new", {
-                owner: owner,
-                errorMessage: "oh dear, looks like we couldn't create that owner"
-            })
-        } else {
-            // res.redirect(`owners/${newOwner.id}`)
-            res.redirect(`owners`)
-        }
-    })
+    try{
+        const newOwner = await owner.save()
+        //res.redirect(`owners/${newOwner.id}`)
+        res.redirect(`owners`)
+    } catch {
+        res.render("owners/new", {
+          owner: owner,
+          errorMessage: "oh dear, looks like we couldn't create that owner"
+        })
+    }
 })
 
 
