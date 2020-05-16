@@ -26,15 +26,17 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }))
 
 const mongoose = require ("mongoose")
 
-/*const MongoURI = require ("./config/keys").MongoURI
+const db = require ("./config/keys").MongoURI
 
-mongoose.connect(MongoURI, {
+mongoose.connect(db, {
     useNewUrlParser: true,
     useCreateIndex : true,
     useUnifiedTopology : true
-})*/
+})
+.then(() => console.log("connection establsihed..."))
+.catch(error => console.log(error))
 
-mongoose.connect(process.env.DATABASE_URL, {
+/*mongoose.connect(process.env.DATABASE_URL, {
     useUnifiedTopology : true,
     useNewUrlParser: true,
     useCreateIndex : true
@@ -45,6 +47,9 @@ mongoose.connect(process.env.DATABASE_URL, {
 const db = mongoose.connection
 db.on("error", error => console.error(error))
 db.once("open", () => console.log("connection established..."))
+*/
+
+
 
 
 //use routes
