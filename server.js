@@ -26,13 +26,13 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }))
 
 const mongoose = require ("mongoose")
 
-const MongoURI = require ("./config/keys").MongoURI
+/*const MongoURI = require ("./config/keys").MongoURI
 
 mongoose.connect(MongoURI, {
     useNewUrlParser: true,
     useCreateIndex : true,
     useUnifiedTopology : true
-})
+})*/
 
 mongoose.connect(process.env.DATABASE_URL, {
     useUnifiedTopology : true,
