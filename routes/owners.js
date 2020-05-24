@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     try{
         const newOwner = await owner.save()
         //res.redirect(`owners/${newOwner.id}`)
-        res.redirect(`owners`)
+        res.redirect("owners")
     } catch {
         res.render("owners/new", {
           owner: owner,
