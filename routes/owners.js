@@ -30,19 +30,23 @@ router.get("/new", (req, res) => {
 // Create new owner
 
 router.post("/", async (req, res) => {
+
+
     const owner = new Owner({
         OwnersName: req.body.OwnersName
     })
     try{
         const newOwner = await owner.save()
         //res.redirect(`owners/${newOwner.id}`)
-        res.redirect("owners")
+        res.redirect(`owners`)
     } catch {
         res.render("owners/new", {
           owner: owner,
           errorMessage: "oh dear, looks like we couldn't create that owner"
         })
     }
+
+
 })
 
 
